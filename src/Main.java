@@ -57,7 +57,7 @@ do {
       System.out.println(win);
     } while(!win);
 
-    System.out.println("there was a win thanks");
+    System.out.println("there was a win thanks bye");
 
     }
 
