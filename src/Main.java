@@ -18,6 +18,7 @@ public class Main {
         String p2move = "O";
         clearBoard();
 
+        displayBoard();
 do {
 
         boolean moves = false;
@@ -37,9 +38,11 @@ do {
                 } else {
                     board[p1row][p1column] = p1move;
                     p1moved = true;
+                    displayBoard();
                 }
                 if (isWin(p1move)) {
                     win = true;
+                    break;
                 }
                 do {
                     p2row = InputHelper.getRangedInt(scan, "P2 - What row do you want your move to be?", 1, 3) - 1;
@@ -49,17 +52,19 @@ do {
                     } else {
                         board[p2row][p2column] = p2move;
                         p2moved = true;
+                        displayBoard();
                     }
                 } while (!p2moved);
                 if (isWin(p2move)) {
                     win = true;
+                    break;
                 }
                 if (isTie() || isTie()) {
                     tie = true;
+                    break;
                 }
             } while (!p1moved);
             moves = true;
-            displayBoard();
         } while (!moves);
 
     } while(!win && !tie);
