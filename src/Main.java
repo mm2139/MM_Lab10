@@ -38,6 +38,9 @@ do {
                     board[p1row][p1column] = p1move;
                     p1moved = true;
                 }
+                if (isWin(p1move)) {
+                    win = true;
+                }
                 do {
                     p2row = InputHelper.getRangedInt(scan, "P2 - What row do you want your move to be?", 1, 3) - 1;
                     p2column = InputHelper.getRangedInt(scan, "P2 - What column do you want your move to be?", 1, 3) - 1;
@@ -48,18 +51,16 @@ do {
                         p2moved = true;
                     }
                 } while (!p2moved);
+                if (isWin(p2move)) {
+                    win = true;
+                }
+                if (isTie() || isTie()) {
+                    tie = true;
+                }
             } while (!p1moved);
             moves = true;
+            displayBoard();
         } while (!moves);
-
-        displayBoard();
-
-        if (isWin(p1move) || isWin(p2move)) {
-            win = true;
-        }
-        if (isTie() || isTie()) {
-        tie = true;
-        }
 
     } while(!win && !tie);
 
