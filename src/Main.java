@@ -13,21 +13,22 @@ public class Main {
         System.out.println("hi welcome to tictactoe");
 
         boolean win = false;
+        boolean tie = false;
+        String p1move = "X";
+        String p2move = "O";
         clearBoard();
 
 do {
+
         boolean moves = false;
         int p1row = 0;
         int p1column = 0;
         int p2row = 0;
         int p2column = 0;
-        String p1move = "X";
-        String p2move = "O";
-
+        boolean p1moved = false;
+        boolean p2moved = false;
 
         do {
-            boolean p1moved = false;
-            boolean p2moved = false;
             do {
                 p1row = InputHelper.getRangedInt(scan, "P1 - What row do you want your move to be?", 1, 3) - 1;
                 p1column = InputHelper.getRangedInt(scan, "P1 - What column do you want your move to be?", 1, 3) - 1;
@@ -53,11 +54,26 @@ do {
 
         displayBoard();
 
-      win = isWinOrTie(p1move) || isWinOrTie(p2move);
-      System.out.println(win);
-    } while(!win);
+        if (isWin(p1move) || isWin(p2move)) {
+            win = true;
+        }
+        if (isTie() || isTie()) {
+        tie = true;
+        }
 
-    System.out.println("there was a win thanks bye");
+    } while(!win && !tie);
+
+    System.out.println("GAME OVER:");
+
+    if (tie) {
+        System.out.print("TIE");
+    } else if (isWin(p1move)) {
+        System.out.print("Player 1 WON");
+    } else {
+        System.out.print("Player 2 WON");
+    }
+
+    // FIGURE OUT HOW TO LOOP AND THEN TURN IN !!
 
     }
 
@@ -86,14 +102,13 @@ do {
         }
     }
 
-    private static boolean isWinOrTie(String player) {
-        boolean winOrTie = isRowWin(player) || isColumnWin(player) || isDiagonalWin(player) || isTie();
-        return winOrTie;
+    private static boolean isWin(String player) {
+        return isRowWin(player) || isColumnWin(player) || isDiagonalWin(player);
     }
 
     private static boolean isRowWin(String player) {
         for (int r = 0; r<board.length; r++) {
-            if (board[r][0].equalsIgnoreCase(board[r][1]) && board[r][1].equalsIgnoreCase(board[r][2])) {
+            if (board[r][0].equalsIgnoreCase(player) && board[r][1].equalsIgnoreCase(player) && board[r][2].equalsIgnoreCase(player)) {
                 return true;
             }
         }
@@ -102,7 +117,7 @@ do {
 
     private static boolean isColumnWin(String player) {
         for (int c = 0; c<board.length; c++) {
-            if (board[0][c].equalsIgnoreCase(board[1][c]) && board[1][c].equalsIgnoreCase(board[2][c])) {
+            if (board[0][c].equalsIgnoreCase(player) && board[1][c].equalsIgnoreCase(player) && board[2][c].equalsIgnoreCase(player)) {
                 return true;
             }
         }
@@ -110,7 +125,7 @@ do {
     }
 
     private static boolean isDiagonalWin(String player) {
-        if ((board[0][0].equalsIgnoreCase(board[1][1]) && board[1][1].equalsIgnoreCase(board[2][2])) || (board[2][0].equalsIgnoreCase(board[1][1]) && board[1][1].equalsIgnoreCase(board[0][2]))) {
+        if ((board[0][0].equalsIgnoreCase(player) && board[1][1].equalsIgnoreCase(player) && board[2][2].equalsIgnoreCase(player) || (board[2][0].equalsIgnoreCase(player) && board[1][1].equalsIgnoreCase(player) && board[0][2].equalsIgnoreCase(player)))) {
             return true;
         }
         return false;
