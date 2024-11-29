@@ -14,37 +14,47 @@ public class Main {
 
         boolean win = false;
         boolean tie = false;
+        boolean play = true;
         String p1move = "X";
         String p2move = "O";
         clearBoard();
 
         displayBoard();
-do {
-
-        boolean moves = false;
-        int p1row = 0;
-        int p1column = 0;
-        int p2row = 0;
-        int p2column = 0;
-        boolean p1moved = false;
-        boolean p2moved = false;
 
         do {
+
+        do {
+
+            boolean moves = false;
+            int p1row = 0;
+            int p1column = 0;
+            int p2row = 0;
+            int p2column = 0;
+            boolean p1moved = false;
+            boolean p2moved = false;
+
             do {
-                p1row = InputHelper.getRangedInt(scan, "P1 - What row do you want your move to be?", 1, 3) - 1;
-                p1column = InputHelper.getRangedInt(scan, "P1 - What column do you want your move to be?", 1, 3) - 1;
-                if (!isValidMove(p1row, p1column)) {
-                    System.out.println("Invalid move.");
-                } else {
-                    board[p1row][p1column] = p1move;
-                    p1moved = true;
-                    displayBoard();
-                }
-                if (isWin(p1move)) {
-                    win = true;
-                    break;
-                }
+
                 do {
+                    p1row = InputHelper.getRangedInt(scan, "P1 - What row do you want your move to be?", 1, 3) - 1;
+                    p1column = InputHelper.getRangedInt(scan, "P1 - What column do you want your move to be?", 1, 3) - 1;
+                    if (!isValidMove(p1row, p1column)) {
+                        System.out.println("Invalid move.");
+                    } else {
+                        board[p1row][p1column] = p1move;
+                        p1moved = true;
+                        displayBoard();
+                    }
+                } while (!p1moved);
+
+                if (isWin(p1move)) {
+                        win = true;
+                        System.out.println("GAME OVER: Player 1 WON");
+                        break;
+                }
+
+                do {
+
                     p2row = InputHelper.getRangedInt(scan, "P2 - What row do you want your move to be?", 1, 3) - 1;
                     p2column = InputHelper.getRangedInt(scan, "P2 - What column do you want your move to be?", 1, 3) - 1;
                     if (!isValidMove(p2row, p2column)) {
@@ -55,31 +65,28 @@ do {
                         displayBoard();
                     }
                 } while (!p2moved);
+
                 if (isWin(p2move)) {
                     win = true;
+                    System.out.println("GAME OVER: Player 2 WON");
                     break;
                 }
+
                 if (isTie() || isTie()) {
                     tie = true;
+                    System.out.println("GAME OVER: TIE");
                     break;
                 }
-            } while (!p1moved);
-            moves = true;
-        } while (!moves);
 
-    } while(!win && !tie);
+                moves = true;
 
-    System.out.println("GAME OVER:");
+            } while (!moves);
 
-    if (tie) {
-        System.out.print("TIE");
-    } else if (isWin(p1move)) {
-        System.out.print("Player 1 WON");
-    } else {
-        System.out.print("Player 2 WON");
-    }
+        } while (!win && !tie);
 
-    // FIGURE OUT HOW TO LOOP AND THEN TURN IN !!
+        play = InputHelper.getYNConfirm("do u want to plau once more y/n", scan);
+
+    } while (play);
 
     }
 
