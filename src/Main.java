@@ -17,19 +17,20 @@ public class Main {
         boolean play = true;
         String p1move = "X";
         String p2move = "O";
+        boolean moves = false;
+        int p1row = 0;
+        int p1column = 0;
+        int p2row = 0;
+        int p2column = 0;
+        boolean p1moved = false;
+        boolean p2moved = false;
 
         do {
+
             clearBoard();
             displayBoard();
-        do {
 
-            boolean moves = false;
-            int p1row = 0;
-            int p1column = 0;
-            int p2row = 0;
-            int p2column = 0;
-            boolean p1moved = false;
-            boolean p2moved = false;
+        do {
 
             do {
 
@@ -38,6 +39,7 @@ public class Main {
                     p1column = InputHelper.getRangedInt(scan, "P1 - What column do you want your move to be?", 1, 3) - 1;
                     if (!isValidMove(p1row, p1column)) {
                         System.out.println("Invalid move.");
+                        p1moved = false;
                     } else {
                         board[p1row][p1column] = p1move;
                         p1moved = true;
@@ -57,6 +59,7 @@ public class Main {
                     p2column = InputHelper.getRangedInt(scan, "P2 - What column do you want your move to be?", 1, 3) - 1;
                     if (!isValidMove(p2row, p2column)) {
                         System.out.println("Invalid move.");
+                        p2moved = false;
                     } else {
                         board[p2row][p2column] = p2move;
                         p2moved = true;
@@ -82,6 +85,11 @@ public class Main {
 
         } while (!win && !tie);
 
+        moves = false;
+        p1moved = false;
+        p2moved = false;
+        win = false;
+        tie = false;
         play = InputHelper.getYNConfirm("Play again? [Y/N]", scan);
 
     } while (play);
