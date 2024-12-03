@@ -10,19 +10,17 @@ public class Main {
         Scanner scan = new Scanner(System.in);
         Random rand = new Random();
 
-        System.out.println("hi welcome to tictactoe");
+        System.out.println("Welcome to TicTacToe.");
 
         boolean win = false;
         boolean tie = false;
         boolean play = true;
         String p1move = "X";
         String p2move = "O";
-        clearBoard();
-
-        displayBoard();
 
         do {
-
+            clearBoard();
+            displayBoard();
         do {
 
             boolean moves = false;
@@ -84,9 +82,11 @@ public class Main {
 
         } while (!win && !tie);
 
-        play = InputHelper.getYNConfirm("do u want to plau once more y/n", scan);
+        play = InputHelper.getYNConfirm("Play again? [Y/N]", scan);
 
     } while (play);
+
+        System.out.println("Thank you for playing!");
 
     }
 
