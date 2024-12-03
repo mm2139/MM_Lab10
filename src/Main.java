@@ -53,6 +53,12 @@ public class Main {
                         break;
                 }
 
+                if (isTie()) {
+                    tie = true;
+                    System.out.println("GAME OVER: TIE");
+                    break;
+                }
+
                 do {
 
                     p2row = InputHelper.getRangedInt(scan, "P2 - What row do you want your move to be?", 1, 3) - 1;
@@ -73,7 +79,7 @@ public class Main {
                     break;
                 }
 
-                if (isTie() || isTie()) {
+                if (isTie()) {
                     tie = true;
                     System.out.println("GAME OVER: TIE");
                     break;
